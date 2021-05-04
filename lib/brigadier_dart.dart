@@ -1,0 +1,2 @@
+library brigadier_dart;
+
