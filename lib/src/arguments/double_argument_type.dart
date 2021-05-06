@@ -61,7 +61,7 @@ class DoubleArgumentType extends ArgumentType<double> {
 
   @override
   bool operator ==(Object other) {
-    if (this == other) return true;
+    if (super == other) return true;
     if (!(other is DoubleArgumentType)) return false;
 
     return _maximum == other._maximum && _minimum == other._minimum;

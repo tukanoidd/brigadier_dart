@@ -37,7 +37,7 @@ class Suggestion implements Comparable<Suggestion> {
 
   @override
   bool operator ==(Object other) {
-    if (this == other) return true;
+    if (super == other) return true;
 
     if (!(other is Suggestion)) return false;
 

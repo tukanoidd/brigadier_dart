@@ -56,7 +56,7 @@ class IntegerArgumentType extends ArgumentType<int> {
 
   @override
   bool operator ==(Object other) {
-    if (this == other) return true;
+    if (super == other) return true;
     if (!(other is IntegerArgumentType)) return false;
 
     return _maximum == other._maximum && _minimum == other._minimum;

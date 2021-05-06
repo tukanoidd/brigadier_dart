@@ -100,7 +100,7 @@ abstract class CommandNode<T> implements Comparable<CommandNode<T>> {
 
   @override
   bool operator ==(Object other) {
-    if (this == other) return true;
+    if (super == other) return true;
     if (!(other is CommandNode)) return false;
 
     if (_children != other._children) return false;

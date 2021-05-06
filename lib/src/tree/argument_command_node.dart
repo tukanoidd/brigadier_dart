@@ -94,7 +94,7 @@ class ArgumentCommandNode<T, K> extends CommandNode<T> {
 
   @override
   bool operator ==(Object other) {
-    if (this == other) return true;
+    if (super == other) return true;
     if (!(other is ArgumentCommandNode)) return false;
 
     if (_name != other._name) return false;
