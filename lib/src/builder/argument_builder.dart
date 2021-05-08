@@ -9,11 +9,11 @@ import 'package:brigadier_dart/src/tree/root_command_node.dart';
 
 abstract class ArgumentBuilder<T, K extends ArgumentBuilder<T, K>> {
   final RootCommandNode<T> _arguments = RootCommandNode();
-  late Command<T> _command;
+  Command<T>? _command;
   Predicate<T> _requirement = (s) => true;
   CommandNode<T>? _target;
   RedirectModifier<T>? _modifier;
-  late bool _forks;
+  bool _forks = false;
 
   @protected
   K getThis();
@@ -46,7 +46,7 @@ abstract class ArgumentBuilder<T, K extends ArgumentBuilder<T, K>> {
     return getThis();
   }
 
-  Command<T> get command => _command;
+  Command<T>? get command => _command;
 
   K requires(final Predicate<T> requirement) {
     _requirement = requirement;

@@ -1,4 +1,3 @@
-import 'package:brigadier_dart/src/tree/command_node.dart';
 import 'package:brigadier_dart/src/tree/literal_command_node.dart';
 import 'package:meta/meta.dart';
 

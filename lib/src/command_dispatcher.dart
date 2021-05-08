@@ -112,7 +112,7 @@ class CommandDispatcher<T> {
           foundCommand = true;
 
           try {
-            final value = context.command!.run(context);
+            final value = context.command!(context);
             result += value;
             _consumer(context, true, value);
             successfulForks++;
@@ -137,13 +137,17 @@ class CommandDispatcher<T> {
     return forked ? successfulForks : result;
   }
 
-  ParseResults<T> parseString(final String command, final T source) {
-    return parseReader(StringReader(command), source);
-  }
+  ParseResults<T> parseString(final String command, final T source) =>
+      parseReader(StringReader(command), source);
 
   ParseResults<T> parseReader(final StringReader command, final T source) {
-    final context =
-        CommandContextBuilder<T>(this, source, _root, command.cursor);
+    final context = CommandContextBuilder<T>(
+      this,
+      source,
+      _root,
+      command.cursor,
+    );
+
     return _parseNodes(_root, command, context);
   }
 
@@ -355,8 +359,10 @@ class CommandDispatcher<T> {
     return self;
   }
 
-  Future<Suggestions> getCompletionSuggestions(final ParseResults<T> parse,
-      [int? cursor]) async {
+  Future<Suggestions> getCompletionSuggestions(
+    final ParseResults<T> parse, [
+    int? cursor,
+  ]) async {
     cursor ??= parse.reader.totalLength;
 
     final context = parse.context;
@@ -365,11 +371,14 @@ class CommandDispatcher<T> {
     final parent = nodeBeforeCursor.parent;
     final start = math.min(nodeBeforeCursor.startPos, cursor);
 
+    print('nodeBeforeCursor: $nodeBeforeCursor');
+    print('parent: $parent');
+    print('start: $start');
+
     final fullInput = parse.reader.string;
     final truncatedInput = fullInput.substring(0, cursor);
     final truncatedInputLowerCase = truncatedInput.toLowerCase();
     final futures = <Future<Suggestions>>[];
-    var i = 0;
 
     if (parent != null) {
       for (final node in parent.children) {
@@ -377,18 +386,36 @@ class CommandDispatcher<T> {
 
         try {
           future = node.listSuggestions(
-              context.build(truncatedInput),
-              SuggestionsBuilder(
-                  truncatedInput, start, truncatedInputLowerCase));
+            context.build(truncatedInput),
+            SuggestionsBuilder(
+              truncatedInput,
+              start,
+              truncatedInputLowerCase,
+            ),
+          );
+
+          print('future: $future');
+          print('suggestionsBuilder: ${SuggestionsBuilder(
+            truncatedInput,
+            start,
+            truncatedInputLowerCase,
+          ).input}');
         } catch (ex) {
           print(ex.toString());
         }
 
-        futures[i++] = future;
+        futures.add(future);
       }
     }
 
+    print(futures);
+
     final suggestions = await Future.wait(futures);
+
+    print('fullInput: $fullInput');
+    print('suggestions: $suggestions');
+
+    print('merged: ${Suggestions.merge(fullInput, suggestions)}');
 
     return Suggestions.merge(fullInput, suggestions);
   }

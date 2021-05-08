@@ -17,7 +17,7 @@ class LiteralCommandNode<T> extends CommandNode<T> {
 
   LiteralCommandNode(
     final String literal,
-    final Command<T> command,
+    final Command<T>? command,
     final Predicate<T> requirement,
     final CommandNode<T>? redirect,
     final RedirectModifier<T>? modifier,

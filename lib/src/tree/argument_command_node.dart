@@ -21,7 +21,7 @@ class ArgumentCommandNode<T, K> extends CommandNode<T> {
   ArgumentCommandNode(
     final String name,
     final ArgumentType<K> type,
-    final Command<T> command,
+    final Command<T>? command,
     final Predicate<T> requirement,
     final CommandNode<T>? redirect,
     final RedirectModifier<T>? modifier,
