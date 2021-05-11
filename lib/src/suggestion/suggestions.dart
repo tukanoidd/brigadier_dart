@@ -8,7 +8,7 @@ import 'package:brigadier_dart/src/suggestion/suggestion.dart';
 
 import 'package:brigadier_dart/src/helpers.dart';
 
-class Suggestions with IntMixin {
+class Suggestions with IntHelper {
   static final Suggestions _EMPTY = Suggestions(StringRange.at(0), []);
 
   final StringRange _range;
@@ -59,8 +59,8 @@ class Suggestions with IntMixin {
   static Suggestions create(final String command, final Iterable<Suggestion> suggestions) {
     if (suggestions.isEmpty) return _EMPTY;
 
-    var start = IntMixin.intMaxFinite;
-    var end = IntMixin.intMinFinite;
+    var start = IntHelper.intMaxFinite;
+    var end = IntHelper.intMinFinite;
     for (final suggestion in suggestions) {
       start = math.min(suggestion.range.start, start);
       end = math.max(suggestion.range.end, end);

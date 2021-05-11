@@ -4,7 +4,6 @@ import 'package:brigadier_dart/src/context/command_context.dart';
 import 'package:brigadier_dart/src/string_reader.dart';
 import 'package:brigadier_dart/src/suggestion/suggestions.dart';
 import 'package:brigadier_dart/src/suggestion/suggestions_builder.dart';
-import 'package:brigadier_dart/src/tree/command_node.dart';
 
 import 'argument_type.dart';
 

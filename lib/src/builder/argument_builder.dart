@@ -40,7 +40,7 @@ abstract class ArgumentBuilder<T, K extends ArgumentBuilder<T, K>> {
 
   Iterable<CommandNode<T>> get arguments => _arguments.children;
 
-  K executes(final Command<T> command) {
+  K executes(final Command<T>? command) {
     _command = command;
 
     return getThis();
@@ -71,7 +71,7 @@ abstract class ArgumentBuilder<T, K extends ArgumentBuilder<T, K>> {
 
   K forward(final CommandNode<T>? target, final RedirectModifier<T>? modifier,
       final bool fork) {
-    if (_arguments.children.isEmpty) {
+    if (_arguments.children.isNotEmpty) {
       throw Exception('Cannot forward a node with children');
     }
 
@@ -88,5 +88,5 @@ abstract class ArgumentBuilder<T, K extends ArgumentBuilder<T, K>> {
 
   bool get isFork => _forks;
 
-  CommandNode<T> build();
+  CommandNode<T>? build();
 }

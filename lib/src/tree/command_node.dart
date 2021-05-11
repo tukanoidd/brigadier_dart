@@ -1,5 +1,6 @@
-import 'package:brigadier_dart/src/builder/argument_builder.dart';
 import 'package:meta/meta.dart';
+
+import 'package:quiver/collection.dart';
 
 import 'package:brigadier_dart/src/ambiguity_consumer.dart';
 import 'package:brigadier_dart/src/string_reader.dart';
@@ -7,6 +8,7 @@ import 'package:brigadier_dart/src/command.dart';
 import 'package:brigadier_dart/src/redirect_modifier.dart';
 import 'package:brigadier_dart/src/helpers.dart';
 
+import 'package:brigadier_dart/src/builder/argument_builder.dart';
 import 'package:brigadier_dart/src/suggestion/all.dart';
 import 'package:brigadier_dart/src/context/context.dart';
 
@@ -49,7 +51,9 @@ abstract class CommandNode<T> implements Comparable<CommandNode<T>> {
 
   bool canUse(final T source) => _requirement(source);
 
-  void addChild(final CommandNode<T> node) {
+  void addChild(final CommandNode<T>? node) {
+    if (node == null) return;
+
     if (node is RootCommandNode) {
       throw Exception(
           'Cannot add a RootCommandNode as a child to any other CommandNode');
@@ -103,7 +107,7 @@ abstract class CommandNode<T> implements Comparable<CommandNode<T>> {
     if (super == other) return true;
     if (!(other is CommandNode)) return false;
 
-    if (_children != other._children) return false;
+    if (!mapsEqual(_children, other._children)) return false;
     if (_command != null
         ? (_command != other._command)
         : (other._command != null)) return false;

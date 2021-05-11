@@ -12,15 +12,9 @@ class RequiredArgumentBuilder<T, K>
   final ArgumentType<K> _type;
   SuggestionProvider<T>? _suggestionProvider;
 
-  RequiredArgumentBuilder._(final String name, final ArgumentType<K> type)
+  RequiredArgumentBuilder(final String name, final ArgumentType<K> type)
       : _name = name,
         _type = type;
-
-  static RequiredArgumentBuilder<T, K> argument<T, K>(
-    final String name,
-    final ArgumentType<K> type,
-  ) =>
-      RequiredArgumentBuilder._(name, type);
 
   RequiredArgumentBuilder<T, K> suggests(final SuggestionProvider<T>? provider) {
     _suggestionProvider = provider;

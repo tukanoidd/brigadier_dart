@@ -5,7 +5,7 @@ import 'package:brigadier_dart/src/suggestion/suggestion.dart';
 import 'package:quiver/core.dart';
 
 class IntegerSuggestion extends Suggestion {
-  int _value;
+  final int _value;
 
   IntegerSuggestion(final StringRange range, final int value,
       [final Message? tooltip])

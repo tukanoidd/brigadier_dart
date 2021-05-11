@@ -8,26 +8,26 @@ import 'simple_command_exception_type.dart';
 class BuiltInExceptions implements BuiltInExceptionProvider {
   // Double
   static final Dynamic2CommandExceptionType _DOUBLE_TOO_SMALL =
-      Dynamic2CommandExceptionType((found, min) => LiteralMessage(
-          'Double must not be less than ' + min + ', found ' + found));
+      Dynamic2CommandExceptionType((found, min) =>
+          LiteralMessage('Double must not be less than $min, found $found'));
 
   static final Dynamic2CommandExceptionType _DOUBLE_TOO_BIG =
-      Dynamic2CommandExceptionType((found, max) => LiteralMessage(
-          'Double must not be more than ' + max + ', found ' + found));
+      Dynamic2CommandExceptionType((found, max) =>
+          LiteralMessage('Double must not be more than $max, found $found'));
 
   // Int
   static final Dynamic2CommandExceptionType _INTEGER_TOO_SMALL =
-      Dynamic2CommandExceptionType((found, min) => LiteralMessage(
-          'Integer must not be less than ' + min + ', found ' + found));
+      Dynamic2CommandExceptionType((found, min) =>
+          LiteralMessage('Integer must not be less than $min, found $found'));
 
   static final Dynamic2CommandExceptionType _INTEGER_TOO_BIG =
-      Dynamic2CommandExceptionType((found, max) => LiteralMessage(
-          'Integer must not be more than ' + max + ', found ' + found));
+      Dynamic2CommandExceptionType((found, max) =>
+          LiteralMessage('Integer must not be more than $max, found $found'));
 
   // Literal
   static final DynamicCommandExceptionType _LITERAL_INCORRECT =
       DynamicCommandExceptionType(
-          (expected) => LiteralMessage('Expected literal ' + expected));
+          (expected) => LiteralMessage('Expected literal $expected'));
 
   // Reader
   static final SimpleCommandExceptionType _READER_EXPECTED_START_OF_QUOTE =
@@ -39,22 +39,22 @@ class BuiltInExceptions implements BuiltInExceptionProvider {
 
   static final DynamicCommandExceptionType _READER_INVALID_ESCAPE =
       DynamicCommandExceptionType((character) => LiteralMessage(
-          "Invalid escape sequence '" + character + "' in quoted string"));
+          "Invalid escape sequence '$character' in quoted string"));
 
   static final DynamicCommandExceptionType _READER_INVALID_BOOL =
       DynamicCommandExceptionType((value) => LiteralMessage(
-          "Invalid bool, expected true or false but found '" + value + "'"));
+          "Invalid bool, expected true or false but found '$value'"));
 
   static final DynamicCommandExceptionType _READER_INVALID_INT =
       DynamicCommandExceptionType(
-          (value) => LiteralMessage("Invalid integer '" + value + "'"));
+          (value) => LiteralMessage("Invalid integer '$value'"));
 
   static final SimpleCommandExceptionType _READER_EXPECTED_INT =
       SimpleCommandExceptionType(LiteralMessage('Expected integer'));
 
   static final DynamicCommandExceptionType _READER_INVALID_DOUBLE =
       DynamicCommandExceptionType(
-          (value) => LiteralMessage("Invalid double '" + value + "'"));
+          (value) => LiteralMessage("Invalid double '$value'"));
 
   static final SimpleCommandExceptionType _READER_EXPECTED_DOUBLE =
       SimpleCommandExceptionType(LiteralMessage('Expected double'));
@@ -64,7 +64,7 @@ class BuiltInExceptions implements BuiltInExceptionProvider {
 
   static final DynamicCommandExceptionType _READER_EXPECTED_SYMBOL =
       DynamicCommandExceptionType(
-          (symbol) => LiteralMessage("Expected '" + symbol + "'"));
+          (symbol) => LiteralMessage("Expected '$symbol'"));
 
   // Dispatcher
   static final SimpleCommandExceptionType _DISPATCHER_UNKNOWN_COMMAND =
@@ -81,7 +81,7 @@ class BuiltInExceptions implements BuiltInExceptionProvider {
 
   static final DynamicCommandExceptionType _DISPATCHER_PARSE_EXCEPTION =
       DynamicCommandExceptionType(
-          (message) => LiteralMessage('Could not parse command: ' + message));
+          (message) => LiteralMessage('Could not parse command: $message'));
 
   @override
   Dynamic2CommandExceptionType get doubleTooLow => _DOUBLE_TOO_SMALL;
@@ -122,13 +122,15 @@ class BuiltInExceptions implements BuiltInExceptionProvider {
   DynamicCommandExceptionType get readerInvalidDouble => _READER_INVALID_DOUBLE;
 
   @override
-  SimpleCommandExceptionType get readerExpectedDouble => _READER_EXPECTED_DOUBLE;
+  SimpleCommandExceptionType get readerExpectedDouble =>
+      _READER_EXPECTED_DOUBLE;
 
   @override
   SimpleCommandExceptionType get readerExpectedBool => _READER_EXPECTED_BOOL;
 
   @override
-  DynamicCommandExceptionType get readerExpectedSymbol => _READER_EXPECTED_SYMBOL;
+  DynamicCommandExceptionType get readerExpectedSymbol =>
+      _READER_EXPECTED_SYMBOL;
 
   @override
   SimpleCommandExceptionType get dispatcherUnknownCommand =>

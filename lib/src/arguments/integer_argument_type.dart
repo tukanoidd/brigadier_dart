@@ -12,19 +12,9 @@ class IntegerArgumentType extends ArgumentType<int> {
   final int _minimum;
   final int _maximum;
 
-  IntegerArgumentType._(final int minimum, final int maximum)
-      : _minimum = minimum,
-        _maximum = maximum;
-
-  static IntegerArgumentType integer([final int? min, final int? max]) {
-    if (min != null && max != null) {
-      return IntegerArgumentType._(min, max);
-    } else if (min != null && max == null) {
-      return IntegerArgumentType._(min, IntMixin.intMaxFinite);
-    }
-
-    return IntegerArgumentType._(IntMixin.intMinFinite, IntMixin.intMaxFinite);
-  }
+  IntegerArgumentType([final int? min, final int? max])
+      : _minimum = min ?? IntHelper.intMinFinite,
+        _maximum = max ?? IntHelper.intMaxFinite;
 
   static int getInteger(
     final CommandContext<dynamic> context,
@@ -43,12 +33,14 @@ class IntegerArgumentType extends ArgumentType<int> {
 
     if (result < _minimum) {
       reader.cursor = start;
-      throw CommandSyntaxException.BUILT_IN_EXCEPTIONS.integerTooLow.createWithContext(reader, result, _minimum);
+      throw CommandSyntaxException.BUILT_IN_EXCEPTIONS.integerTooLow
+          .createWithContext(reader, result, _minimum);
     }
 
     if (result > _maximum) {
       reader.cursor = start;
-      throw CommandSyntaxException.BUILT_IN_EXCEPTIONS.integerTooHigh.createWithContext(reader, result, _maximum);
+      throw CommandSyntaxException.BUILT_IN_EXCEPTIONS.integerTooHigh
+          .createWithContext(reader, result, _maximum);
     }
 
     return result;
@@ -67,9 +59,10 @@ class IntegerArgumentType extends ArgumentType<int> {
 
   @override
   String toString() {
-    if (_minimum == IntMixin.intMinFinite && _maximum == IntMixin.intMaxFinite) {
+    if (_minimum == IntHelper.intMinFinite &&
+        _maximum == IntHelper.intMaxFinite) {
       return 'integer()';
-    } else if (_maximum == IntMixin.intMaxFinite) {
+    } else if (_maximum == IntHelper.intMaxFinite) {
       return 'integer($_minimum)';
     }
 

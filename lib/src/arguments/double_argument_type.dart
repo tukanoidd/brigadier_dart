@@ -17,19 +17,9 @@ class DoubleArgumentType extends ArgumentType<double> {
   final double _minimum;
   final double _maximum;
 
-  DoubleArgumentType._(final double minimum, final double maximum)
-      : _minimum = minimum,
-        _maximum = maximum;
-
-  static DoubleArgumentType doubleArg([final double? min, final double? max]) {
-    if (min != null && max != null) {
-      return DoubleArgumentType._(min, max);
-    } else if (min != null && max == null) {
-      return DoubleArgumentType._(min, double.maxFinite);
-    }
-
-    return DoubleArgumentType._(double.minPositive, double.maxFinite);
-  }
+  DoubleArgumentType([final double? min, final double? max])
+      : _minimum = min ?? -double.maxFinite,
+        _maximum = max ?? double.maxFinite;
 
   static double getDouble(
     final CommandContext<dynamic> context,
@@ -72,7 +62,7 @@ class DoubleArgumentType extends ArgumentType<double> {
 
   @override
   String toString() {
-    if (_minimum == double.minPositive && _maximum == double.maxFinite) {
+    if (_minimum == -double.maxFinite && _maximum == double.maxFinite) {
       return 'double()';
     } else if (_maximum == double.maxFinite) {
       return 'double($_minimum)';

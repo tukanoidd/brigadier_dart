@@ -1,8 +1,7 @@
-import 'dart:collection';
-
 import 'package:brigadier_dart/src/command.dart';
 import 'package:brigadier_dart/src/redirect_modifier.dart';
 import 'package:brigadier_dart/src/tree/tree.dart';
+import 'package:quiver/collection.dart';
 
 import 'context.dart';
 import 'parsed_command_node.dart';
@@ -95,11 +94,9 @@ class CommandContext<T> {
     if (super == other) return true;
     if (!(other is CommandContext)) return false;
 
-    if (_arguments != other._arguments) return false;
+    if (!mapsEqual(_arguments, other._arguments)) return false;
     if (_rootNode != other._rootNode) return false;
-    if (_nodes.length != other._nodes.length || _nodes != other._nodes) {
-      return false;
-    }
+    if (!listsEqual(_nodes, other._nodes)) return false;
     if (_command != null
         ? (_command != other._command)
         : (other._command != null)) return false;

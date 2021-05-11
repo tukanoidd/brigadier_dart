@@ -50,7 +50,7 @@ class CommandDispatcher<T> {
   }
 
   int executeReader(final StringReader input, final T source) {
-    final ParseResults<T> parse = parseReader(input, source);
+    final parse = parseReader(input, source);
     return executeParse(parse);
   }
 
@@ -371,10 +371,6 @@ class CommandDispatcher<T> {
     final parent = nodeBeforeCursor.parent;
     final start = math.min(nodeBeforeCursor.startPos, cursor);
 
-    print('nodeBeforeCursor: $nodeBeforeCursor');
-    print('parent: $parent');
-    print('start: $start');
-
     final fullInput = parse.reader.string;
     final truncatedInput = fullInput.substring(0, cursor);
     final truncatedInputLowerCase = truncatedInput.toLowerCase();
@@ -393,13 +389,6 @@ class CommandDispatcher<T> {
               truncatedInputLowerCase,
             ),
           );
-
-          print('future: $future');
-          print('suggestionsBuilder: ${SuggestionsBuilder(
-            truncatedInput,
-            start,
-            truncatedInputLowerCase,
-          ).input}');
         } catch (ex) {
           print(ex.toString());
         }
@@ -408,14 +397,7 @@ class CommandDispatcher<T> {
       }
     }
 
-    print(futures);
-
     final suggestions = await Future.wait(futures);
-
-    print('fullInput: $fullInput');
-    print('suggestions: $suggestions');
-
-    print('merged: ${Suggestions.merge(fullInput, suggestions)}');
 
     return Suggestions.merge(fullInput, suggestions);
   }

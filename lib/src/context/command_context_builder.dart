@@ -3,6 +3,7 @@ import 'package:brigadier_dart/src/command_dispatcher.dart';
 import 'package:brigadier_dart/src/context/command_context.dart';
 import 'package:brigadier_dart/src/redirect_modifier.dart';
 import 'package:brigadier_dart/src/tree/tree.dart';
+import 'package:quiver/collection.dart';
 
 import 'parsed_command_node.dart';
 

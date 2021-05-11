@@ -69,7 +69,7 @@ class ArgumentCommandNode<T, K> extends CommandNode<T> {
 
   @override
   RequiredArgumentBuilder<T, K> createBuilder() {
-    final builder = RequiredArgumentBuilder.argument<T, K>(_name, _type);
+    final builder = RequiredArgumentBuilder<T, K>(_name, _type);
 
     builder.requires(requirement);
     builder.forward(redirect, redirectModifier, isFork);
