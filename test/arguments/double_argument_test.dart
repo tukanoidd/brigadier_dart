@@ -15,10 +15,7 @@ void main() {
       final reader = StringReader('-5');
 
       expect(
-        () {
-          DoubleArgumentType(0, 100).parse(reader);
-          fail('Parsed number that it shouldn\'t have');
-        },
+        () => DoubleArgumentType(0, 100).parse(reader),
         throwsA(
           (ex) =>
               ex is CommandSyntaxException &&
@@ -33,10 +30,7 @@ void main() {
       final reader = StringReader('5');
 
       expect(
-        () {
-          DoubleArgumentType(-100, 0).parse(reader);
-          fail('Parse number that it shouldn\'t have');
-        },
+        () => DoubleArgumentType(-100, 0).parse(reader),
         throwsA(
           (ex) =>
               ex is CommandSyntaxException &&

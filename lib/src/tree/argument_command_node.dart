@@ -84,7 +84,7 @@ class ArgumentCommandNode<T, K> extends CommandNode<T> {
   bool isValidInput(final String input) {
     try {
       final reader = StringReader(input);
-      type.parse(reader);
+      _type.parse(reader);
 
       return !reader.canRead() || reader.peek() == '';
     } catch (ex) {

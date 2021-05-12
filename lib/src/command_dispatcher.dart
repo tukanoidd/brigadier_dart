@@ -152,9 +152,10 @@ class CommandDispatcher<T> {
   }
 
   ParseResults<T> _parseNodes(
-      final CommandNode<T> node,
-      final StringReader originalReader,
-      final CommandContextBuilder<T> contextSoFar) {
+    final CommandNode<T> node,
+    final StringReader originalReader,
+    final CommandContextBuilder<T> contextSoFar,
+  ) {
     final source = contextSoFar.source;
     Map<CommandNode<T>, CommandSyntaxException>? errors;
     List<ParseResults<T>>? potentials;

@@ -59,7 +59,8 @@ class LiteralCommandNode<T> extends CommandNode<T> {
 
       if (reader.string.substring(start, end) == _literal) {
         reader.cursor = end;
-        if (!reader.canRead() || reader.peek() == '') {
+
+        if (!reader.canRead() || reader.peek() == ' ') {
           return end;
         } else {
           reader.cursor = start;

@@ -448,32 +448,30 @@ void main() {
       () {
         final reader = StringReader('bcd');
 
-        try {
-          reader.expect('a');
-          fail('Didn\'t pass {expect_incorrect test}');
-        } on CommandSyntaxException catch (ex) {
-          expect(
-              ex.type,
-              equals(CommandSyntaxException
-                  .BUILT_IN_EXCEPTIONS.readerExpectedSymbol));
-          expect(ex.cursor, equals(0));
-        }
+        expect(
+          () => reader.expect('a'),
+          throwsA((ex) =>
+              ex is CommandSyntaxException &&
+              ex.type ==
+                  CommandSyntaxException
+                      .BUILT_IN_EXCEPTIONS.readerExpectedSymbol &&
+              ex.cursor == 0),
+        );
       },
     );
 
     test('expect_none', () {
       final reader = StringReader('');
 
-      try {
-        reader.expect('a');
-        fail('Didn\'t pass {expect_none test}');
-      } on CommandSyntaxException catch (ex) {
-        expect(
-            ex.type,
-            equals(CommandSyntaxException
-                .BUILT_IN_EXCEPTIONS.readerExpectedSymbol));
-        expect(ex.cursor, equals(0));
-      }
+      expect(
+        () => reader.expect('a'),
+        throwsA((ex) =>
+            ex is CommandSyntaxException &&
+            ex.type ==
+                CommandSyntaxException
+                    .BUILT_IN_EXCEPTIONS.readerExpectedSymbol &&
+            ex.cursor == 0),
+      );
     });
   });
 
@@ -488,31 +486,27 @@ void main() {
     test('readBool_incorrect', () {
       final reader = StringReader('tuesday');
 
-      try {
-        reader.readBool();
-        fail('Didn\'t pass {readBool_incorrect test}');
-      } on CommandSyntaxException catch (ex) {
-        expect(
-            ex.type,
-            equals(
-                CommandSyntaxException.BUILT_IN_EXCEPTIONS.readerInvalidBool));
-        expect(ex.cursor, equals(0));
-      }
+      expect(
+        () => reader.readBool(),
+        throwsA((ex) =>
+            ex is CommandSyntaxException &&
+            ex.type ==
+                CommandSyntaxException.BUILT_IN_EXCEPTIONS.readerInvalidBool &&
+            ex.cursor == 0),
+      );
     });
 
     test('readBool_none', () {
       final reader = StringReader('');
 
-      try {
-        reader.readBool();
-        fail('Didn\'t pass {readBool_none test}');
-      } on CommandSyntaxException catch (ex) {
-        expect(
-            ex.type,
-            equals(
-                CommandSyntaxException.BUILT_IN_EXCEPTIONS.readerExpectedBool));
-        expect(ex.cursor, equals(0));
-      }
+      expect(
+        () => reader.readBool(),
+        throwsA((ex) =>
+            ex is CommandSyntaxException &&
+            ex.type ==
+                CommandSyntaxException.BUILT_IN_EXCEPTIONS.readerExpectedBool &&
+            ex.cursor == 0),
+      );
     });
   });
 }
