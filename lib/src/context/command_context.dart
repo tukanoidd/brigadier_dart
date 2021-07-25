@@ -41,7 +41,7 @@ class CommandContext<T> {
         _forks = forks;
 
   CommandContext<T> copyFor(final T source) {
-    if (_source == _source) return this;
+    if (_source == source) return this;
 
     return CommandContext<T>(
       source,
